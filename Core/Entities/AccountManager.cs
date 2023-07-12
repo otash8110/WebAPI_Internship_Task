@@ -2,9 +2,8 @@
 
 namespace Core.Entities
 {
-    public class AccountManager: AuditableBaseEntity
+    public class AccountManager: BaseEmployee
     {
-        public string Name { get; set; }
-        public string PhoneNumber { get; set; }
+       
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Common
+﻿namespace Core.Common
 {
-    internal class AuditableBaseEntity
+    public class AuditableBaseEntity: BaseEntity
     {
+        public DateTime LastModified { get; set; }
     }
 }

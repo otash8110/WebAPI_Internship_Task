@@ -19,6 +19,9 @@ namespace Infrastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProjectModel>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<ProjectModel>()
                 .HasKey(k => new { k.CustomerId, k.AccountManagerId, k.SmmManagerId, k.Id });
 
             modelBuilder.Entity<CustomerModel>().Navigation(c => c.CustomerPhones).AutoInclude(true);

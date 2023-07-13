@@ -68,7 +68,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerModelId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -76,17 +76,19 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_CustomerPhones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerPhones_Customers_CustomerModelId",
-                        column: x => x.CustomerModelId,
+                        name: "FK_CustomerPhones_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SmmManagerId = table.Column<int>(type: "int", nullable: false),
                     AccountManagerId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
@@ -117,9 +119,9 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerPhones_CustomerModelId",
+                name: "IX_CustomerPhones_CustomerId",
                 table: "CustomerPhones",
-                column: "CustomerModelId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_AccountManagerId",

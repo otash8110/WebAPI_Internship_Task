@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230713051401_Init")]
+    [Migration("20230713120819_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -82,7 +82,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CustomerModelId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModified")
@@ -93,7 +93,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerModelId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("CustomerPhones");
                 });
@@ -110,7 +110,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
@@ -160,9 +163,13 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.CustomerPhoneModel", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.CustomerModel", null)
+                    b.HasOne("Infrastructure.Entities.CustomerModel", "Customer")
                         .WithMany("CustomerPhones")
-                        .HasForeignKey("CustomerModelId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.ProjectModel", b =>

@@ -21,6 +21,7 @@ namespace Infrastructure
             services.AddScoped<IGenericRepository<CustomerPhoneModel>, GenericRepository<CustomerPhoneModel>>();
             services.AddScoped<IGenericRepository<AccountManagerModel>, GenericRepository<AccountManagerModel>>();
             services.AddScoped<IGenericRepository<SmmManagerModel>, GenericRepository<SmmManagerModel>>();
+            services.AddScoped<IGenericRepository<ProjectModel>, GenericRepository<ProjectModel>>();
         }
     }
 }

@@ -22,21 +22,6 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AccountManagerModelSmmManagerModel", b =>
-                {
-                    b.Property<int>("AccountManagersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SmmManagersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AccountManagersId", "SmmManagersId");
-
-                    b.HasIndex("SmmManagersId");
-
-                    b.ToTable("AccountSmmManager", (string)null);
-                });
-
             modelBuilder.Entity("Infrastructure.Entities.AccountManagerModel", b =>
                 {
                     b.Property<int>("Id")
@@ -94,7 +79,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int?>("CustomerModelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModified")
@@ -105,23 +90,23 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerModelId");
 
                     b.ToTable("CustomerPhones");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.ProjectModel", b =>
                 {
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SmmManagerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CustomerModelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModified")
@@ -130,12 +115,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SmmManagerId")
-                        .HasColumnType("int");
+                    b.HasKey("CustomerId", "AccountManagerId", "SmmManagerId", "Id");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerModelId");
+                    b.HasIndex("AccountManagerId");
 
                     b.HasIndex("SmmManagerId");
 
@@ -164,21 +146,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("SmmManagers");
                 });
 
-            modelBuilder.Entity("AccountManagerModelSmmManagerModel", b =>
-                {
-                    b.HasOne("Infrastructure.Entities.AccountManagerModel", null)
-                        .WithMany()
-                        .HasForeignKey("AccountManagersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Infrastructure.Entities.SmmManagerModel", null)
-                        .WithMany()
-                        .HasForeignKey("SmmManagersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Infrastructure.Entities.CustomerModel", b =>
                 {
                     b.HasOne("Infrastructure.Entities.AccountManagerModel", "AccountManager")
@@ -190,26 +157,51 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.CustomerPhoneModel", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.CustomerModel", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
+                    b.HasOne("Infrastructure.Entities.CustomerModel", null)
+                        .WithMany("CustomerPhones")
+                        .HasForeignKey("CustomerModelId");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.ProjectModel", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.CustomerModel", "CustomerModel")
+                    b.HasOne("Infrastructure.Entities.AccountManagerModel", "AccountManager")
+                        .WithMany("Projects")
+                        .HasForeignKey("AccountManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.Entities.CustomerModel", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerModelId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Entities.SmmManagerModel", "SmmManager")
-                        .WithMany()
-                        .HasForeignKey("SmmManagerId");
+                        .WithMany("Projects")
+                        .HasForeignKey("SmmManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("CustomerModel");
+                    b.Navigation("AccountManager");
+
+                    b.Navigation("Customer");
 
                     b.Navigation("SmmManager");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.AccountManagerModel", b =>
+                {
+                    b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.CustomerModel", b =>
+                {
+                    b.Navigation("CustomerPhones");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.SmmManagerModel", b =>
+                {
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

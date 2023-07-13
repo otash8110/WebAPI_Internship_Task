@@ -3,17 +3,16 @@ using API.Response;
 using API.Services;
 using Core.Common;
 using Infrastructure.Repository;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.ConcreteServices
 {
-    public class AccountManagerService<TModel, TResponse, TObject> : ManagerService<TModel, TResponse, TObject>
+    public class ConcreteManagerService<TModel, TResponse, TObject> : ManagerService<TModel, TResponse, TObject>
         where TModel : BaseEmployee, new()
         where TResponse : ManagerResponse, new()
         where TObject : ManagerObject, new()
     {
 
-        public AccountManagerService(IGenericRepository<TModel> accountManagerRepository) : base(accountManagerRepository)
+        public ConcreteManagerService(IGenericRepository<TModel> accountManagerRepository) : base(accountManagerRepository)
         {
 
         }

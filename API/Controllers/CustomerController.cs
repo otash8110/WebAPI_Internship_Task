@@ -25,12 +25,6 @@ namespace API.Controllers
             this.customerService = customerService;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         [HttpGet("{id}")]
         public async Task<CustomerResponse> Get(int id)
         {
@@ -64,7 +58,7 @@ namespace API.Controllers
         }
 
         [HttpPut()]
-        public async Task<CustomerResponse> Put([FromBody] CustomerObject value)
+        public async Task<CustomerResponse> Put([FromBody] CustomerUpdateObject value)
         {
             try
             {

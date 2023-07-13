@@ -19,9 +19,9 @@ namespace API.Services
 
         public async Task<TResponse> AddManagerAsync(TObject managerObject)
         {
-            var accountManager = MapManagerFromObject(managerObject);
+            var manager = MapManagerFromObject(managerObject);
 
-            var managerResult = await managerRepository.AddAsync(accountManager);
+            var managerResult = await managerRepository.AddAsync(manager);
 
             return MapAccountManagerFromModel(managerResult);
         }

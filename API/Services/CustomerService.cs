@@ -49,7 +49,7 @@ namespace API.Services
             return result;
         }
 
-        public async Task<CustomerResponse> UpdateCustomer(CustomerObject customerObject)
+        public async Task<CustomerResponse> UpdateCustomer(CustomerUpdateObject customerObject)
         {
             var customer = await customerRepository.GetOneAsync(customerObject.Id);
             customer.Name = customerObject.Name;

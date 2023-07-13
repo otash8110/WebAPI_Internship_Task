@@ -1,5 +1,4 @@
-﻿
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context
@@ -19,13 +18,14 @@ namespace Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AccountManagerModel>()
-                .HasMany(s => s.SmmManagers)
-                .WithMany(a => a.AccountManagers)
-                .UsingEntity(c =>
-                {
-                    c.ToTable("AccountSmmManager");
-                });
+            modelBuilder.Entity<ProjectModel>()
+                .HasKey(k => new { k.CustomerId, k.AccountManagerId, k.SmmManagerId, k.Id });
+
+            modelBuilder.Entity<CustomerModel>().Navigation(c => c.CustomerPhones).AutoInclude(true);
+            modelBuilder.Entity<CustomerModel>().Navigation(c => c.AccountManager).AutoInclude(true);
+
+            modelBuilder.Entity<CustomerPhoneModel>().Navigation(p => p.Customer).AutoInclude(false);
+
             base.OnModelCreating(modelBuilder);
         }
     }

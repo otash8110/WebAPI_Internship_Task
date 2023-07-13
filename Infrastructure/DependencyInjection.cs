@@ -1,4 +1,6 @@
 ﻿using Infrastructure.Context;
+using Infrastructure.Entities;
+using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,10 @@ namespace Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("Default"), 
                     builder => builder.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
             });
+
+            services.AddScoped<IGenericRepository<CustomerModel>, GenericRepository<CustomerModel>>();
+            services.AddScoped<IGenericRepository<CustomerPhoneModel>, GenericRepository<CustomerPhoneModel>>();
+            services.AddScoped<IGenericRepository<AccountManagerModel>, GenericRepository<AccountManagerModel>>();
         }
     }
 }

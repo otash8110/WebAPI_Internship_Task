@@ -20,6 +20,7 @@ namespace Infrastructure
             services.AddScoped<IGenericRepository<CustomerModel>, GenericRepository<CustomerModel>>();
             services.AddScoped<IGenericRepository<CustomerPhoneModel>, GenericRepository<CustomerPhoneModel>>();
             services.AddScoped<IGenericRepository<AccountManagerModel>, GenericRepository<AccountManagerModel>>();
+            services.AddScoped<IGenericRepository<SmmManagerModel>, GenericRepository<SmmManagerModel>>();
         }
     }
 }

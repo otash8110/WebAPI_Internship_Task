@@ -14,7 +14,8 @@ namespace API
         public static void AddAPIServices(this IServiceCollection services)
         {
             services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<ManagerService<AccountManagerModel, ManagerResponse, ManagerObject>, AccountManagerService<AccountManagerModel, ManagerResponse, ManagerObject>>();
+            services.AddScoped<ManagerService<AccountManagerModel, ManagerResponse, ManagerObject>, ConcreteManagerService<AccountManagerModel, ManagerResponse, ManagerObject>>();
+            services.AddScoped<ManagerService<SmmManagerModel, ManagerResponse, ManagerObject>, ConcreteManagerService<SmmManagerModel, ManagerResponse, ManagerObject>>();
         }
     }
 }

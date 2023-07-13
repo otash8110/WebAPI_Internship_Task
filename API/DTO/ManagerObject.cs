@@ -1,6 +1,6 @@
 ﻿namespace API.DTO
 {
-    public class AccountManagerObject
+    public class ManagerObject
     {
         public int Id { get; set; }
         public string Name { get; set; }

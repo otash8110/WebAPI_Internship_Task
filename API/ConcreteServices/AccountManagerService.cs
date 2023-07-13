@@ -10,7 +10,7 @@ namespace API.ConcreteServices
     public class AccountManagerService<TModel, TResponse, TObject> : ManagerService<TModel, TResponse, TObject>
         where TModel : BaseEmployee, new()
         where TResponse : ManagerResponse, new()
-        where TObject : AccountManagerObject, new()
+        where TObject : ManagerObject, new()
     {
 
         public AccountManagerService(IGenericRepository<TModel> accountManagerRepository) : base(accountManagerRepository)

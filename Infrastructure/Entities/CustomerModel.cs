@@ -6,5 +6,6 @@ namespace Infrastructure.Entities
     {
         public int? AccountManagerId { get; set; }
         public AccountManagerModel AccountManager { get; set; }
+        public ICollection<CustomerPhoneModel> CustomerPhones { get; set; }
     }
 }

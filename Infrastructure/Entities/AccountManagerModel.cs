@@ -4,11 +4,7 @@ namespace Infrastructure.Entities
 {
     public class AccountManagerModel: AccountManager
     {
-        public AccountManagerModel()
-        {
-            SmmManagers = new HashSet<SmmManagerModel>();
-        }
+        public IList<ProjectModel> Projects { get; set; }
 
-        public virtual ICollection<SmmManagerModel> SmmManagers { get; set; }
     }
 }

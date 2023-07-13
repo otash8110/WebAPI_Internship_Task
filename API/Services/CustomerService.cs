@@ -38,12 +38,12 @@ namespace API.Services
 
         public async Task DeleteCustomer(int customerId)
         {
-            await customerRepository.Delete(customerId);
+            await customerRepository.DeleteAsync(customerId);
         }
 
         public async Task<CustomerResponse> GetCustomer(int customerId)
         {
-            var customer = await customerRepository.Get();
+            var customer = await customerRepository.GetAsync();
             var result = customer.Select(MapCustomerFromModel).Where(c => c.Id == customerId).FirstOrDefault();
 
             return result;
@@ -51,12 +51,12 @@ namespace API.Services
 
         public async Task<CustomerResponse> UpdateCustomer(CustomerObject customerObject)
         {
-            var customer = await customerRepository.GetOne(customerObject.Id);
+            var customer = await customerRepository.GetOneAsync(customerObject.Id);
             customer.Name = customerObject.Name;
             customer.Surname = customerObject.Surname;
             customer.CustomerPhones.FirstOrDefault().PhoneNumber = customerObject.PhoneNumber;
 
-            var updatedCustomer = await customerRepository.Update(customer);
+            var updatedCustomer = await customerRepository.UpdateAsync(customer);
 
             return MapCustomerFromModel(updatedCustomer);
         }

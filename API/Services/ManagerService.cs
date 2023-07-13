@@ -28,22 +28,22 @@ namespace API.Services
 
         public async Task DeleteManagerAsync(int managerId)
         {
-            await managerRepository.Delete(managerId);
+            await managerRepository.DeleteAsync(managerId);
         }
 
         public async Task<TResponse> GetManagerAsync(int managerId)
         {
-            var manager = await managerRepository.GetOne(managerId);
+            var manager = await managerRepository.GetOneAsync(managerId);
 
             return MapAccountManagerFromModel(manager);
         }
 
         public async Task<TResponse> UpdateManagerAsync(TObject managerObject, int id)
         {
-            var manager = await managerRepository.GetOne(id);
+            var manager = await managerRepository.GetOneAsync(id);
             var updatedManagerModel = UpdateModel(manager, managerObject);
 
-            var updatedManager = await managerRepository.Update(updatedManagerModel);
+            var updatedManager = await managerRepository.UpdateAsync(updatedManagerModel);
 
             return MapAccountManagerFromModel(updatedManager);
         }

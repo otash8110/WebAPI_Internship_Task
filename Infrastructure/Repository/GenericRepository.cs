@@ -21,21 +21,21 @@ namespace Infrastructure.Repository
             return result.Entity;
         }
 
-        public async Task<T> GetOne(int id)
+        public async Task<T> GetOneAsync(int id)
         {
             var result = await context.Set<T>().Where(e => e.Id == id).FirstOrDefaultAsync();
 
             return result;
         }
 
-        public async Task<ICollection<T>> Get()
+        public async Task<ICollection<T>> GetAsync()
         {
             var result = await context.Set<T>().ToListAsync();
 
             return result;
         }
 
-        public async Task<T> Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             var result = context.Set<T>().Update(entity);
             await context.SaveChangesAsync();
@@ -43,13 +43,13 @@ namespace Infrastructure.Repository
             return result.Entity;
         }
 
-        public async Task Delete(T entity)
+        public async Task DeleteAsync(T entity)
         {
             context.Set<T>().Remove(entity);
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entity = context.Set<T>().Find(id);
             context.Remove(entity);

@@ -9,7 +9,7 @@ namespace API.ConcreteServices
 {
     public class AccountManagerService<TModel, TResponse, TObject> : ManagerService<TModel, TResponse, TObject>
         where TModel : BaseEmployee, new()
-        where TResponse : AccountManagerResponse, new()
+        where TResponse : ManagerResponse, new()
         where TObject : AccountManagerObject, new()
     {
 

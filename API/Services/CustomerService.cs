@@ -77,7 +77,7 @@ namespace API.Services
 
             if (model.AccountManager != null)
             {
-                result.AccountManager = new AccountManagerResponse
+                result.AccountManager = new ManagerResponse
                 {
                     Id = model.AccountManager.Id,
                     Name = model.AccountManager.Name,

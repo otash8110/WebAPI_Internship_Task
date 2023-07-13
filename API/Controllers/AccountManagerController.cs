@@ -14,16 +14,16 @@ namespace API.Controllers
     public class AccountManagerController : Controller
     {
 
-        private readonly ManagerService<AccountManagerModel, AccountManagerResponse, AccountManagerObject> accountManagerService;
+        private readonly ManagerService<AccountManagerModel, ManagerResponse, AccountManagerObject> accountManagerService;
 
-        public AccountManagerController(ManagerService<AccountManagerModel, AccountManagerResponse, AccountManagerObject> accountManagerService)
+        public AccountManagerController(ManagerService<AccountManagerModel, ManagerResponse, AccountManagerObject> accountManagerService)
         {
             this.accountManagerService = accountManagerService;
         }
 
 
         [HttpGet("{id}")]
-        public async Task<AccountManagerResponse> Get(int id)
+        public async Task<ManagerResponse> Get(int id)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<AccountManagerResponse> Post([FromBody] AccountManagerObject value)
+        public async Task<ManagerResponse> Post([FromBody] AccountManagerObject value)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace API.Controllers
         }
 
         [HttpPut()]
-        public async Task<AccountManagerResponse> Put([FromBody] AccountManagerObject value)
+        public async Task<ManagerResponse> Put([FromBody] AccountManagerObject value)
         {
             try
             {

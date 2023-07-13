@@ -10,7 +10,7 @@ namespace API.Response
         public string Name { get; set; }
         public string Surname { get; set; }
         public IEnumerable<CustomerPhoneResponse> PhoneNumbers { get; set; } = Array.Empty<CustomerPhoneResponse>();
-        public AccountManagerResponse AccountManager { get; set; }
+        public ManagerResponse AccountManager { get; set; }
     }
 
     public class CustomerPhoneResponse
@@ -19,7 +19,7 @@ namespace API.Response
         public string PhoneNumber { get; set; }
     }
 
-    public class AccountManagerResponse
+    public class ManagerResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

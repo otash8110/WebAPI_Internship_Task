@@ -1,5 +1,4 @@
-﻿using Infrastructure.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace API.Response

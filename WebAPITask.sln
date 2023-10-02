@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{0371FF44-E664-4346-AB69-FBACCCD593CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{F03203E2-02E8-4B52-BC9E-303EEE0BF035}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{F03203E2-02E8-4B52-BC9E-303EEE0BF035}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

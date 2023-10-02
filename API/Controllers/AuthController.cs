@@ -9,8 +9,9 @@ namespace API.Controllers
     //[Authorize(Policy = "IsAdmin")]
     public class AuthenticController : Controller
     {
+        // Test endpoint for checking Authorize Attribute
         [HttpPost("/Auth/Logins")]
-        public IActionResult Login(string login, string password)
+        public IActionResult LoginTest(string login, string password)
         {
             return Ok();
         }
